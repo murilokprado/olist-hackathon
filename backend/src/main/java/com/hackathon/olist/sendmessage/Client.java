@@ -1,4 +1,4 @@
-package com.hackathon.olist.client;
+package com.hackathon.olist.sendmessage;
 
 import lombok.Getter;
 import lombok.Setter;
