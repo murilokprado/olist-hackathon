@@ -19,7 +19,12 @@ import {
   QItemLabel,
   QTabs,
   QTab,
-  QRouteTab
+  QRouteTab,
+  QPullToRefresh,
+  QCard,
+  QCardSection,
+  QCardActions,
+  QSeparator
 } from "quasar";
 
 Vue.use(Quasar, {
@@ -40,7 +45,12 @@ Vue.use(Quasar, {
     QItemLabel,
     QTabs,
     QTab,
-    QRouteTab
+    QRouteTab,
+    QPullToRefresh,
+    QCard,
+    QCardSection,
+    QCardActions,
+    QSeparator
   },
   directives: {},
   plugins: {}
