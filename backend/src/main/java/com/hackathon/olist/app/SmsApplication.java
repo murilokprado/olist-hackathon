@@ -2,7 +2,6 @@ package com.hackathon.olist.app;
 
 import com.twilio.twiml.MessagingResponse;
 import com.twilio.twiml.messaging.Body;
-import com.twilio.twiml.messaging.Redirect;
 import org.springframework.stereotype.Component;
 
 import static spark.Spark.post;
@@ -15,8 +14,8 @@ public class SmsApplication {
             res.type("application/xml");
 
             Body body = new Body
-                    .Builder("Sua resposta foi enviada para a Larissa, sabia que as suas chances em fechar um negócio aumentaram em 14%?! Você é fera!\n" +
-                    "&#xA;\n" +
+                    .Builder("Sua resposta foi enviada para a Larissa, sabia que as suas chances em fechar um " +
+                    "negócio aumentaram em 14%?! Você é fera! " +
                     "Se quiser mais detalhes sobre a resposta acesse: https://olist-hackaton.now.sh/message/1")
                     .build();
 
