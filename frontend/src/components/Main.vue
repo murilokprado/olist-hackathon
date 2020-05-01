@@ -1,7 +1,7 @@
 <template>
   <div>
     <AppHeader />
-    <q-tabs class="custom-tabs" align="center" v-model="tab">
+    <q-tabs class="custom-tabs" dense align="justify" v-model="tab">
       <q-tab
         name="general"
         icon="dashboard"
@@ -17,7 +17,7 @@
       <q-tab
         name="coins"
         icon="attach_money"
-        label="Olist Coins"
+        label="O. Coins"
         @click="changeRoute('coins')"
       />
     </q-tabs>
@@ -40,6 +40,8 @@ export default {
   },
   mounted() {
     this.tab = this.$route.path.split("/")[1];
+
+    if (!this.tab) this.changeRoute("general");
   },
   methods: {
     changeRoute(newTab) {
