@@ -1,10 +1,25 @@
 <template>
   <div>
     <AppHeader />
-    <q-tabs v-model="tab" no-caps class="">
-      <q-tab name="geral" label="Geral" />
-      <q-tab name="mensagens" label="Mensagens" />
-      <q-tab name="coins" label="Olist Coins" />
+    <q-tabs class="custom-tabs" align="center" v-model="tab">
+      <q-tab
+        name="general"
+        icon="dashboard"
+        label="Geral"
+        @click="changeRoute('general')"
+      />
+      <q-tab
+        name="messages"
+        icon="mode_comment"
+        label="Mensagens"
+        @click="changeRoute('messages')"
+      />
+      <q-tab
+        name="coins"
+        icon="attach_money"
+        label="Olist Coins"
+        @click="changeRoute('coins')"
+      />
     </q-tabs>
     <router-view />
   </div>
@@ -20,8 +35,26 @@ export default {
   },
   data() {
     return {
-      tab: "geral"
+      tab: null
     };
+  },
+  mounted() {
+    this.tab = this.$route.path.split("/")[1];
+  },
+  methods: {
+    changeRoute(newTab) {
+      if (newTab === this.tab) return false;
+
+      this.tab = newTab;
+
+      this.$router.push(`/${this.tab}`);
+    }
   }
 };
 </script>
+
+<style scoped>
+.custom-tabs {
+  padding-top: 16px;
+}
+</style>

@@ -2,7 +2,6 @@
   <div class="app-header">
     <div class="app-header__name">
       <strong>Loja do Marcão</strong>
-      <q-btn label="Teste" />
     </div>
   </div>
 </template>
@@ -18,13 +17,14 @@ export default {
   align-items: center;
   display: flex;
   height: 55px;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
 }
 
 .app-header__name {
   border: 2px solid white;
   border-top: none;
+  border-left: none;
   display: flex;
   align-items: center;
   height: 100%;
