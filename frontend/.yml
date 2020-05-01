@@ -1,2 +1,0 @@
-- name: ZEIT Now Deployment
-  uses: amondnet/now-deployment@v2.0.2
