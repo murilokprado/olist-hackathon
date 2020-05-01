@@ -12,7 +12,7 @@
     <artifactId>olist</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>olist</name>
-    <description>Project developmente for Mega hack</description>
+    <description>Project development for Mega hack</description>
 
     <properties>
         <java.version>11</java.version>
