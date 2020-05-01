@@ -18,25 +18,6 @@ public class SendMessageController {
         this.sendMessageService = sendMessageService;
     }
 
-    @GetMapping("client")
-    public List<Client> getObject() {
-        Client client = new Client();
-        client.setId(1);
-        client.setName("Murilo");
-        client.setPhone("47XXXXXXXX");
-
-        Client client2 = new Client();
-        client2.setId(2);
-        client2.setName("Valenza");
-        client2.setPhone("47XXXXXXX");
-
-        List<Client> clients = new ArrayList<>();
-        clients.add(client);
-        clients.add(client2);
-
-        return clients;
-    }
-
     @PostMapping("sms")
     private Message sendMessage(@RequestBody MessageRequest messageRequest) {
         return sendMessageService.sendSms(messageRequest);
