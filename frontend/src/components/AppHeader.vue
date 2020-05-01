@@ -2,6 +2,7 @@
   <div class="app-header">
     <div class="app-header__name">
       <strong>Loja do Marcão</strong>
+      <q-btn label="Teste" />
     </div>
   </div>
 </template>
