@@ -23,7 +23,7 @@ jobs:
     - name: Build
       uses: actions/setup-java@v1
       with:
-        java-version: 1.11
+        java-version: 11
     - name: Build Olist-hackathon with Maven
       run: mvn -B package --file backend/pom.xml
     - name: Deploy to Heroku
