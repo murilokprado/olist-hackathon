@@ -20,14 +20,14 @@ jobs:
       env: 
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: heroku container:login       
-    - name: Build olist
+    - name: Build
       uses: actions/setup-java@v1
       with:
         java-version: 1.11
-    - name: Build with Maven
+    - name: Build Olist-hackathon with Maven
       run: mvn -B package --file backend/pom.xml
-    - name: Release
+    - name: Deploy to Heroku
       env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: heroku container:release -a ${{ secrets.HEROKU_APP_NAME }} olist-hackathon 
+        HEROKU_API_TOKEN: ${{ secrets.HEROKU_API_TOKEN }}
+      run: git push https://heroku:$HEROKU_API_TOKEN@git.heroku.com/$HEROKU_APP_NAME.git origin/master:master
       
