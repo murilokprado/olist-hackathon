@@ -20,10 +20,10 @@ jobs:
       env: 
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: heroku container:login && heroku plugins:install java   
-    - name: Java 11
+    - name: Java 8
       uses: actions/setup-java@v1
       with:
-        java-version: 11
+        java-version: 1.8
     - name: Build Olist-hackathon with Maven
       run: mvn -B package --file backend/pom.xml
     - name: Deploy Heroku
