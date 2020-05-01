@@ -18,7 +18,7 @@ public class SendMessageController {
         this.sendMessageService = sendMessageService;
     }
 
-    @GetMapping
+    @GetMapping("client")
     public List<Client> getObject() {
         Client client = new Client();
         client.setId(1);
