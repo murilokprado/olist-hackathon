@@ -26,9 +26,9 @@ jobs:
         java-version: 11
     - name: Build Olist-hackathon with Maven
       run: mvn -B package --file backend/pom.xml
-    - name: Deploy to Heroku
+    - name: Add remote
       env: 
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
-      run: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git origin/master:master
+      run: git remote add https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git && heroku run java -jar backend/target/olist-0.0.1-SNAPSHOT.jar
       
