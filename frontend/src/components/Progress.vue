@@ -43,7 +43,7 @@
             </div>
           </div>
           <p style="flex: 1" class="progress__subtitle">
-            ALGUM MOTIVO
+            Cadastrar 20 perguntas e respostas
           </p>
         </div>
       </div>
@@ -53,13 +53,13 @@
         <img src="@/assets/emoji-sacar.png" alt="Frete grátis" />
         <div class="progress__left">
           <div style="display: flex; flex: 1; justify-content: space-between">
-            <div class="progress__title">Sacar cinquentinha</div>
+            <div class="progress__title">Sacar R$50</div>
             <div class="progress__coins">
               <q-icon name="monetization_on" /> 3000
             </div>
           </div>
           <p style="flex: 1" class="progress__subtitle">
-            ALGUM MOTIVO
+            Ver relatório por 7 dias seguidos
           </p>
         </div>
       </div>
