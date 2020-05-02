@@ -1,14 +1,19 @@
 <template>
   <div class="messages">
-    <h5>Aguardando respostas</h5>
+    <h5>Aguardando</h5>
     <div class="row">
       <div
         v-for="i in [1, 2, 3, 4]"
         :key="i"
         class="col-xs-12 col-sm-6 col-md-4 col-lg-4"
       >
+        <h6>Cadeira de praia</h6>
         <div class="custom-card">
-          <WaitingReturn :question="`question ${i}`" />
+          <WaitingReturn
+            buyer="Matheus V. Valenza"
+            question="Existe algum óleo próprio para lubrificar a cadeira após sair da praia?"
+            dateTime="20 de março 16:20"
+          />
         </div>
       </div>
     </div>
@@ -44,14 +49,22 @@ export default {
 }
 
 .custom-card {
-  color: #333;
-  margin-right: 16px;
-  margin-bottom: 16px;
+  margin: 0 4px 16px 4px;
 }
 
 h5 {
   text-align: left;
   margin: 0;
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 42px;
+}
+
+h6 {
+  text-align: left;
+  margin: 0;
   margin-bottom: 16px;
+  font-size: 24px;
+  color: #96a7af;
 }
 </style>
