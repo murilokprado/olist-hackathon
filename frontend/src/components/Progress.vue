@@ -108,6 +108,7 @@ export default {
 
 .progress img {
   width: 70px;
+  height: 70px;
 }
 
 .progress__coins {
