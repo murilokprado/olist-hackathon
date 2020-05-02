@@ -1,32 +1,30 @@
 <template>
-  <q-pull-to-refresh @refresh="refresh">
-    <div class="messages">
-      <h5>Aguardando respostas</h5>
-      <div class="row">
-        <div
-          v-for="i in [1, 2, 3, 4]"
-          :key="i"
-          class="col-xs-12 col-sm-6 col-md-4 col-lg-4"
-        >
-          <div class="custom-card">
-            <WaitingReturn :question="`question ${i}`" />
-          </div>
-        </div>
-      </div>
-      <h5>Respostas automáticas</h5>
-      <div class="row">
-        <div
-          v-for="i in [1, 2, 3, 4, 5, 6, 7]"
-          :key="i"
-          class="col-xs-12 col-sm-6 col-md-4 col-lg-4"
-        >
-          <div class="custom-card">
-            <WaitingReturn :question="`question ${i}`" />
-          </div>
+  <div class="messages">
+    <h5>Aguardando respostas</h5>
+    <div class="row">
+      <div
+        v-for="i in [1, 2, 3, 4]"
+        :key="i"
+        class="col-xs-12 col-sm-6 col-md-4 col-lg-4"
+      >
+        <div class="custom-card">
+          <WaitingReturn :question="`question ${i}`" />
         </div>
       </div>
     </div>
-  </q-pull-to-refresh>
+    <h5>Respostas automáticas</h5>
+    <div class="row">
+      <div
+        v-for="i in [1, 2, 3, 4, 5, 6, 7]"
+        :key="i"
+        class="col-xs-12 col-sm-6 col-md-4 col-lg-4"
+      >
+        <div class="custom-card">
+          <WaitingReturn :question="`question ${i}`" />
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -36,13 +34,6 @@ export default {
   name: "Messages",
   components: {
     WaitingReturn
-  },
-  methods: {
-    refresh(done) {
-      setTimeout(() => {
-        done();
-      }, 1000);
-    }
   }
 };
 </script>

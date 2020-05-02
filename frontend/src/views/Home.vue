@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <Main />
+    <q-pull-to-refresh @refresh="refresh">
+      <Main />
+    </q-pull-to-refresh>
   </div>
 </template>
 
@@ -12,6 +14,13 @@ export default {
   name: "Home",
   components: {
     Main
+  },
+  methods: {
+    refresh(done) {
+      setTimeout(() => {
+        done();
+      }, 1000);
+    }
   }
 };
 </script>

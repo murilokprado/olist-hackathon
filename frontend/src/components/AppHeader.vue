@@ -3,6 +3,9 @@
     <div class="app-header__name">
       <strong>Loja do Marcão</strong>
     </div>
+    <div class="app-header__icon">
+      <q-icon name="notifications_active" size="sm" />
+    </div>
   </div>
 </template>
 
@@ -17,17 +20,20 @@ export default {
   align-items: center;
   display: flex;
   height: 55px;
-  justify-content: flex-start;
+  justify-content: space-between;
   width: 100%;
+  padding: 16px;
 }
 
 .app-header__name {
-  border: 2px solid white;
-  border-top: none;
-  border-left: none;
   display: flex;
   align-items: center;
   height: 100%;
   padding: 0 16px;
+  font-size: 16px;
+}
+
+.app-header__icon {
+  color: rgba(255, 255, 255, 0.6);
 }
 </style>

@@ -1,37 +1,39 @@
 <template>
   <div>
     <AppHeader />
-    <q-tabs class="custom-tabs" dense align="justify" v-model="tab">
-      <q-tab
-        name="general"
-        icon="dashboard"
-        label="Geral"
-        @click="changeRoute('general')"
+    <div class="tabs">
+      <Tab
+        icon="house"
+        name="Geral"
+        @click.native="changeRoute('general')"
+        :active="isActive('general')"
       />
-      <q-tab
-        name="messages"
+      <Tab
         icon="mode_comment"
-        label="Mensagens"
-        @click="changeRoute('messages')"
+        name="Mensagens"
+        @click.native="changeRoute('messages')"
+        :active="isActive('messages')"
       />
-      <q-tab
-        name="coins"
-        icon="attach_money"
-        label="O. Coins"
-        @click="changeRoute('coins')"
+      <Tab
+        icon="monetization_on"
+        name="Din Din!"
+        @click.native="changeRoute('coins')"
+        :active="isActive('coins')"
       />
-    </q-tabs>
+    </div>
     <router-view />
   </div>
 </template>
 
 <script>
 import AppHeader from "./AppHeader";
+import Tab from "./Tab";
 
 export default {
   name: "Main",
   components: {
-    AppHeader
+    AppHeader,
+    Tab
   },
   data() {
     return {
@@ -50,13 +52,18 @@ export default {
       this.tab = newTab;
 
       this.$router.push(`/${this.tab}`);
+    },
+    isActive(tab) {
+      return this.tab === tab;
     }
   }
 };
 </script>
 
 <style scoped>
-.custom-tabs {
-  padding-top: 16px;
+.tabs {
+  padding: 0 16px;
+  display: flex;
+  justify-content: space-around;
 }
 </style>
