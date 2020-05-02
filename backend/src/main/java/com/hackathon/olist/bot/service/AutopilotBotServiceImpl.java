@@ -27,6 +27,12 @@ public class AutopilotBotServiceImpl implements AutopilotBotService {
     @Value("${twilio.service.id}")
     private String twilioServiceId;
 
+    @Value("${twilio.channel.id}")
+    private String twilioChannelId;
+
+    @Value("${twilio.channel.url}")
+    private String twilioChannelUrl;
+
     private AutopilotBotFactory autopilotBotFactory;
 
     public AutopilotBotServiceImpl(AutopilotBotFactory autopilotBotFactory) {
@@ -37,13 +43,19 @@ public class AutopilotBotServiceImpl implements AutopilotBotService {
     public Webhook createWebhook() {
         Twilio.init(twilioId, twilioToken);
 
+        ResourceSet<Webhook> webhooks = Webhook.reader(twilioServiceId, twilioChannelId).read();
+
+        for(Webhook webhook: webhooks) {
+            Webhook.deleter(twilioServiceId, twilioChannelId, webhook.getSid()).delete();
+        }
+
         return Webhook.creator(
                 twilioServiceId,
-                "CH67d6f35bf09d4c2ea6bef0d91ee87b18",
+                twilioChannelId,
                 Webhook.Type.WEBHOOK)
                 .setConfigurationFilters(Arrays.asList("onMessageSent"))
                 .setConfigurationMethod(Webhook.Method.POST)
-                .setConfigurationUrl("https://channels.autopilot.twilio.com/v1/AC4e3c39e8b433f7689a6a0d378b36745a/UAc07612a9ed06c9aeac40e285b49720fc/twilio-messaging")
+                .setConfigurationUrl(twilioChannelUrl)
                 .create();
     }
 
@@ -51,29 +63,16 @@ public class AutopilotBotServiceImpl implements AutopilotBotService {
     public Channel createChannel() {
         Twilio.init(twilioId, twilioToken);
 
-        UserChannel user = getUser();
-
-        return Channel.creator(user.getServiceSid())
+        return Channel.creator(twilioServiceId)
                 .create();
-    }
-
-    @Override
-    public UserChannel getUser() {
-        Twilio.init(twilioId, twilioToken);
-
-        return UserChannel.fetcher(
-                twilioServiceId,
-                "US23752a10903e4007a5747685d64b167b",
-                "CH67d6f35bf09d4c2ea6bef0d91ee87b18")
-                .fetch();
     }
 
     @Override
     public List<MessageResponse> getMessages() {
         Twilio.init(twilioId, twilioToken);
 
-        ResourceSet<Message> resourceMessages = Message.reader(twilioServiceId, "CH67d6f35bf09d4c2ea6bef0d91ee87b18")
-                .limit(20)
+        ResourceSet<Message> resourceMessages = Message.reader(twilioServiceId, twilioChannelId)
+                .limit(100)
                 .read();
 
         return autopilotBotFactory.create(resourceMessages);
@@ -81,11 +80,27 @@ public class AutopilotBotServiceImpl implements AutopilotBotService {
 
     @Override
     public Message createMessage(MessageRequest messageRequest) {
+        createWebhook();
         Twilio.init(twilioId, twilioToken);
 
         return Message
-                .creator(twilioServiceId, "CH67d6f35bf09d4c2ea6bef0d91ee87b18")
+                .creator(twilioServiceId, twilioChannelId)
                 .setBody(messageRequest.getMessage())
+                .setFrom("user")
                 .create();
+    }
+
+    private UserChannel getUser() {
+        return UserChannel.fetcher(
+                twilioServiceId,
+                "US23752a10903e4007a5747685d64b167b",
+                twilioChannelId)
+                .fetch();
+    }
+
+    private void deleteMessages(ResourceSet<Message> resourceMessages) {
+        for (Message message : resourceMessages) {
+            Message.deleter(twilioServiceId, twilioChannelId, message.getSid()).delete();
+        }
     }
 }
