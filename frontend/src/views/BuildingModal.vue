@@ -1,18 +1,23 @@
 <template>
-  <q-dialog v-model="alert">
-    <q-card style="padding: 24px 24px 0 24px">
-      <p>
-        Ops! Ainda estamos trabalhando nesta jornada.
-        <q-card-actions>
-          <q-btn align="right" flat label="Estou curioso" @click="onClick" />
-          <q-btn
-            align="right"
-            flat
-            label="Ok, tudo bem"
-            @click="$router.go(-1)"
-          />
-        </q-card-actions></p
-    ></q-card>
+  <q-dialog v-model="alert" persistent>
+    <q-card>
+      <q-card-section class="row items-center">
+        <q-avatar icon="priority_high" color="blue-grey-9" text-color="white" />
+        <p style="padding-top: 42px; font-size: 18px" class="q-ml-sm">
+          Ops! Ainda estamos trabalhando nesta jornada.
+        </p>
+      </q-card-section>
+
+      <q-card-actions align="right">
+        <q-btn flat label="Estou curioso" v-close-popup @click="onClick" />
+        <q-btn
+          flat
+          label="Ok, tudo bem"
+          v-close-popup
+          @click="$router.go(-1)"
+        />
+      </q-card-actions>
+    </q-card>
   </q-dialog>
 </template>
 

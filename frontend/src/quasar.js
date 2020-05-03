@@ -27,7 +27,8 @@ import {
   QSeparator,
   QInput,
   QDialog,
-  ClosePopup
+  ClosePopup,
+  QAvatar
 } from "quasar";
 
 Vue.use(Quasar, {
@@ -55,7 +56,8 @@ Vue.use(Quasar, {
     QCardActions,
     QSeparator,
     QInput,
-    QDialog
+    QDialog,
+    QAvatar
   },
   directives: {
     ClosePopup
