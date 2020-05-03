@@ -4,6 +4,7 @@ import Home from "../views/Home.vue";
 import General from "../views/General.vue";
 import Messages from "../views/Messages.vue";
 import Coins from "../views/Coins.vue";
+import BuildingModal from "../views/BuildingModal.vue";
 
 Vue.use(VueRouter);
 
@@ -29,6 +30,11 @@ const routes = [
         component: Coins
       }
     ]
+  },
+  {
+    path: "/building",
+    name: "Building",
+    component: BuildingModal
   }
 ];
 

@@ -30,22 +30,28 @@
         Excluídas
       </div>
     </div>
+    <div class="actions" v-if="activeType === 'pendentes'">
+      <div class="actions__item" @click="$router.push('/building')">
+        Responder em massa
+      </div>
+      <div class="actions__item" @click="$router.push('/building')">
+        Excluir mensagem
+      </div>
+    </div>
     <div v-if="showPending">
       <h5 id="pendentes">Pendentes</h5>
-      <div class="messages__amount">{{ pendingMessages.length }} mensagens</div>
-      <div class="row" v-if="pendingMessages.length > 0">
+      <div class="messages__amount">
+        {{ pendingQuestions.length }} mensagens
+      </div>
+      <div class="row" v-if="pendingQuestions.length > 0">
         <div
-          v-for="i in pendingMessages"
-          :key="i"
+          v-for="q in pendingQuestions"
+          :key="q.id"
           class="col-xs-12 col-sm-6 col-md-4 col-lg-4"
         >
-          <h6>Cadeira de praia</h6>
+          <h6>{{ q.product }}</h6>
           <div class="custom-card">
-            <WaitingReturn
-              buyer="Matheus V. Valenza"
-              question="Existe algum óleo próprio para lubrificar a cadeira após sair da praia?"
-              dateTime="20 de março 16:20"
-            />
+            <WaitingReturn v-bind="{ ...q }" />
           </div>
         </div>
       </div>
@@ -56,16 +62,36 @@
     <div v-if="showAnswered">
       <h5 id="respondidas">Respondidas</h5>
       <div class="messages__amount">
-        {{ answeredMessages.length }} mensagens
+        {{ answeredQuestions.length }} mensagens
       </div>
-      <div class="row" v-if="answeredMessages.length > 0">
+      <div class="row" v-if="answeredQuestions.length > 0">
         <div
-          v-for="i in answeredMessages"
-          :key="i"
+          v-for="q in answeredQuestions"
+          :key="q.id"
           class="col-xs-12 col-sm-6 col-md-4 col-lg-4"
         >
+          <h6>{{ q.product }}</h6>
           <div class="custom-card">
-            <WaitingReturn :question="`question ${i}`" />
+            <Answered v-bind="{ ...q }" />
+          </div>
+        </div>
+      </div>
+      <div v-else class="placeholder">
+        <h5>Não há nada por aqui :D</h5>
+      </div>
+    </div>
+    <div v-if="showAnswered">
+      <h5 id="respondidas">Respondidas Automaticamente</h5>
+      <div class="messages__amount">{{ botQuestions.length }} mensagens</div>
+      <div class="row" v-if="botQuestions.length > 0">
+        <div
+          v-for="q in botQuestions"
+          :key="q.id"
+          class="col-xs-12 col-sm-6 col-md-4 col-lg-4"
+        >
+          <h6>{{ q.product }}</h6>
+          <div class="custom-card">
+            <Answered v-bind="{ ...q }" />
           </div>
         </div>
       </div>
@@ -78,12 +104,13 @@
       <div class="messages__amount">{{ deletedMessages.length }} mensagens</div>
       <div class="row" v-if="deletedMessages.length > 0">
         <div
-          v-for="i in deletedMessages"
-          :key="i"
+          v-for="q in deletedMessages"
+          :key="q.id"
           class="col-xs-12 col-sm-6 col-md-4 col-lg-4"
         >
+          <h6>{{ q.product }}</h6>
           <div class="custom-card">
-            <WaitingReturn :question="`question ${i}`" />
+            <WaitingReturn v-bind="{ ...q }" />
           </div>
         </div>
       </div>
@@ -96,17 +123,21 @@
 
 <script>
 import WaitingReturn from "@/components/WaitingReturnCard";
+import Answered from "@/components/AnsweredCard";
+import { answeredQuestions, botQuestions, pendingQuestions } from "@/mock";
 
 export default {
   name: "Messages",
   components: {
-    WaitingReturn
+    WaitingReturn,
+    Answered
   },
   data() {
     return {
+      pendingQuestions,
+      answeredQuestions,
+      botQuestions,
       activeType: "todas",
-      pendingMessages: [1, 2, 3, 4],
-      answeredMessages: [1, 2, 3, 4],
       deletedMessages: []
     };
   },
@@ -136,7 +167,7 @@ export default {
 .types {
   display: flex;
   justify-content: space-around;
-  margin-bottom: 58px;
+  margin-bottom: 42px;
 }
 
 .types__item {
@@ -168,5 +199,18 @@ export default {
 .placeholder {
   color: #96a7af;
   padding-top: 32px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.actions__item {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  margin-right: 16px;
+  margin-bottom: 16px;
 }
 </style>

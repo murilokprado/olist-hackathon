@@ -16,39 +16,21 @@
     <div class="card__body">
       {{ question }}
     </div>
-    <div class="card__buttons" @click="$router.push('/building')">
-      <div class="card__button" @click="$emit('afirmative')">
-        {{ answers[0] }}
-      </div>
-      <div class="card__button" @click="$emit('negative')">
-        {{ answers[1] }}
-      </div>
-    </div>
+    <div class="card__label">Resposta</div>
     <div class="card__answer">
-      <div class="user--talking">
-        <q-icon name="record_voice_over" size="sm" />
-      </div>
-      <q-input
-        style="flex: 1"
-        filled
-        dark
-        dense
-        v-model="manualAnswer"
-        placeholder="Personalize sua resposta. Escreva aqui"
-        @keyup.enter="onSendManualAnswer"
-      />
+      {{ answer }}
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "WaitingReturnCard",
+  name: "AnsweredCard",
   props: {
     buyer: String,
     question: String,
     dateTime: String,
-    answers: Array
+    answer: String
   },
   data() {
     return {
@@ -127,32 +109,16 @@ export default {
   mix-blend-mode: normal;
 }
 
-.card__buttons {
-  padding: 16px 16px 0 16px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.card__button {
-  color: white;
-  margin-right: 16px;
-  border: 1.6px solid white;
-  border-radius: 40px;
-  padding: 8px 16px;
-  background: rgba(255, 255, 255, 0.1);
-  cursor: pointer;
-}
-
-.card__button:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
 .card__answer {
-  margin-top: 8px;
-  padding: 8px 16px 0 16px;
-  border-top: 1px solid #b8c2c0;
+  padding: 0 16px 0 16px;
   display: flex;
   align-items: center;
+  text-align: left;
+}
+
+.card__label {
+  text-align: left;
+  margin: 8px 8px 8px 16px;
+  color: rgba(255, 255, 255, 0.6);
 }
 </style>
