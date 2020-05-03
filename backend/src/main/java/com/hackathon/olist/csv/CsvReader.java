@@ -4,11 +4,13 @@ import com.hackathon.olist.question.Question;
 import com.hackathon.olist.question.QuestionFactory;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+import java.util.stream.Collectors;
 
 @Service
 public class CsvReader {
@@ -22,21 +24,18 @@ public class CsvReader {
     public List<Question> readCsv() {
         List<Question> questions = new ArrayList<>();
 
-        try {
-            try (Scanner scanner = new Scanner(new File("src/main/resources/sample-perguntas.csv"))) {
+        try (InputStream inputStream = getClass().getResourceAsStream("/sample-perguntas.csv");
+             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+            List<String> contents = reader.lines().collect(Collectors.toList());
 
-                scanner.nextLine();
+            contents.remove(0);
 
-                while (scanner.hasNext()) {
-                    String[] line = scanner.nextLine().split(",");
+            for (String content : contents) {
+                String[] line = content.split(",");
 
-                    questions.add(questionFactory.create(line));
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace();
+                questions.add(questionFactory.create(line));
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
