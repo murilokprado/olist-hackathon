@@ -3,6 +3,12 @@
     <AppHeader />
     <div class="tabs">
       <Tab
+        icon="house"
+        name="Geral"
+        @click.native="changeRoute('general')"
+        :active="isActive('general')"
+      />
+      <Tab
         icon="mode_comment"
         name="Mensagens"
         @click.native="changeRoute('messages')"
@@ -13,12 +19,6 @@
         name="Din Din!"
         @click.native="changeRoute('coins')"
         :active="isActive('coins')"
-      />
-      <Tab
-        icon="house"
-        name="Geral"
-        @click.native="$router.push('/building')"
-        :active="isActive('general')"
       />
     </div>
     <transition name="fade" mode="out-in">
@@ -42,12 +42,20 @@ export default {
       tab: null
     };
   },
-  mounted() {
-    this.tab = this.$route.path.split("/")[1];
-
-    if (!this.tab) this.changeRoute("general");
+  beforeUpdate() {
+    this.chooseTab();
+  },
+  created() {
+    this.chooseTab();
   },
   methods: {
+    chooseTab() {
+      this.tab = this.$route.path.split("/")[1];
+
+      if (!this.tab) return this.changeRoute("general");
+
+      return this.changeRoute(this.tab);
+    },
     changeRoute(newTab) {
       if (newTab === this.tab) return false;
 
