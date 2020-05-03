@@ -1,7 +1,7 @@
 package com.hackathon.olist.csv;
 
-import com.hackathon.olist.ask.Ask;
-import com.hackathon.olist.ask.AskFactory;
+import com.hackathon.olist.question.Question;
+import com.hackathon.olist.question.QuestionFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -13,14 +13,14 @@ import java.util.Scanner;
 @Service
 public class CsvReader {
 
-    private AskFactory askFactory;
+    private QuestionFactory questionFactory;
 
-    public CsvReader(AskFactory askFactory) {
-        this.askFactory = askFactory;
+    public CsvReader(QuestionFactory questionFactory) {
+        this.questionFactory = questionFactory;
     }
 
-    public List<Ask> readCsv() {
-        List<Ask> asks = new ArrayList<>();
+    public List<Question> readCsv() {
+        List<Question> questions = new ArrayList<>();
 
         try {
             try (Scanner scanner = new Scanner(new File("src/main/resources/sample-perguntas.csv"))) {
@@ -30,7 +30,7 @@ public class CsvReader {
                 while (scanner.hasNext()) {
                     String[] line = scanner.nextLine().split(",");
 
-                    asks.add(askFactory.create(line));
+                    questions.add(questionFactory.create(line));
                 }
 
             } catch (IOException e) {
@@ -40,6 +40,6 @@ public class CsvReader {
             e.printStackTrace();
         }
 
-        return asks;
+        return questions;
     }
 }

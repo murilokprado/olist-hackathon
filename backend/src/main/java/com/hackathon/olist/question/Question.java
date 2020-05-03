@@ -1,4 +1,4 @@
-package com.hackathon.olist.ask;
+package com.hackathon.olist.question;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class Ask {
+public class Question {
 
     private String reported;
     private LocalDateTime created;
