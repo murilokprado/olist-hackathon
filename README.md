@@ -1,6 +1,6 @@
 # MegaHack - Desafio Olist
 
-## Frontend
+## Frontend (mobile first)
 Deploy do frontend: https://olist-hackaton.now.sh/
 
 ## Backend
